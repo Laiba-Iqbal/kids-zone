@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kids-Zone - Complete Learning Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+            :root {
+            --primary-color: #FF6B6B;
+            --secondary-color: #4D96FF;
+            --accent-color: #6C5CE7;
+            --background: #F9F9F9;
+            --text-color: #2D3436;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text-color);
+            font-family: 'Comic Neue', cursive;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .floating-text {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .nav-button {
+            padding: 12px 25px;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(5px);
+            color: white;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid white;
+        }
+
+        .nav-button:hover {
+            background: white;
+            color: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+    
+        section {
+            padding: 4rem 2rem;
+            min-height: 100vh;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--accent-color);
+            text-align: center;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 4px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+     
+        .abc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .letter-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .letter-card:hover {
+            transform: translateY(-10px) rotate(2deg);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+        }
+
+        .letter-header {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .letter-header h3 {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: bounce 1.5s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+      
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .image-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            aspect-ratio: 1;
+        }
+
+        .image-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .image-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .image-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 0.5rem;
+            text-align: center;
+            font-size: 0.9rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .image-item:hover .image-label {
+            transform: translateY(0);
+        }
+
+    
+        .numbers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .number-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .number-card:hover {
+            transform: scale(1.05);
+            background: var(--secondary-color);
+            color: white;
+        }
+
+   
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .color-item {
+            padding: 1.5rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .color-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .color-item:hover::after {
+            opacity: 1;
+        }
+
+        .color-item:hover {
+            transform: translateY(-5px);
+        }
+
+  
+        .math-game {
+            background: white;
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .math-problem {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .answer-input {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.2rem;
+            border: 2px solid var(--primary-color);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .submit-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .submit-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255,107,107,0.4);
+        }
+
+     
+        footer {
+            background: var(--text-color);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+            position: relative;
+        }
+
+        .footer-bubbles {
+            position: absolute;
+            top: -50px;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 10" xmlns="http://www.w3.org/2000/svg"><path d="M0 10 Q 25 5 50 10 T 100 10 L 100 0 L 0 0 Z" fill="%232D3436"/></svg>');
+        }
+
+     
+        @media (max-width: 768px) {
+            .abc-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+        }
+
+     
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    
+.progress-dashboard {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    gap: 2rem;
+}
+
+.progress-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.progress-bar {
+    height: 20px;
+    background: #eee;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--secondary-color);
+    transition: width 0.5s ease;
+}
+
+.badges-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.badge-item {
+    text-align: center;
+    padding: 1rem;
+    background: white;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+}
+
+.badge-item:hover {
+    transform: translateY(-5px);
+}
+
+.badge-item i {
+    font-size: 2rem;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+}
+       .rhymes-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .video-card {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .video-card iframe {
+            width: 100%;
+            height: 200px;
+            border: none;
+        }
+
+        .video-label {
+            padding: 1rem;
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .abc-grid .image-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+       
+        .number-card .image-item {
+            margin-top: 1rem;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+      
+        .rhymes-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .video-card {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .video-card iframe {
+            width: 100%;
+            height: 200px;
+            border: none;
+        }
+
+        .complete-abc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 20px;
+        }
+        
+section {
+    padding: 3rem 1rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+    overflow: hidden;
+}
+
+
+#numbers {
+    padding: 2rem 1rem; 
+    min-height: auto; 
+}
+
+
+.numbers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    max-width: 800px; 
+    margin: 0 auto;
+    padding: 1rem 0; }
+
+
+.number-card {
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+
+#nursery-rhymes {
+    padding-top: 2rem; 
+}
+
+section {
+    padding: 2rem 1rem; 
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+    overflow: hidden;
+    min-height: auto; 
+}
+
+#abcs {
+    padding: 2rem 1rem; 
+}
+
+.complete-abc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem; 
+    padding: 1rem 0; 
+}
+.letter-card {
+    padding: 1rem; 
+}
+
+#numbers {
+    padding: 2rem 1rem; 
+}
+
+.numbers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem; 
+    max-width: 800px; 
+    margin: 0 auto;
+    padding: 1rem 0; 
+}
+
+.number-card {
+    padding: 1rem; 
+}
+
+
+#nursery-rhymes {
+    padding: 2rem 1rem; 
+}
+
+.rhymes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem; 
+    padding: 1rem 0; 
+}
+
+.video-card {
+    padding: 0.5rem; 
+}
+
+
+#colors {
+    padding: 2rem 1rem; 
+}
+
+.color-palette {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem; 
+    max-width: 800px; 
+    margin: 0 auto;
+    padding: 1rem 0; 
+}
+
+.color-item {
+    padding: 1rem;
+}
+
+
+#math {
+    padding: 2rem 1rem; 
+}
+
+.math-game {
+    padding: 1.5rem; 
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+
+#parent-section {
+    padding: 2rem 1rem; 
+}
+
+.progress-dashboard {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 0; 
+}
+
+.progress-card {
+    padding: 1.5rem; 
+}
+
+.badges-grid {
+    gap: 1rem; 
+}
+
+
+footer {
+    padding: 1.5rem;
+    margin-top: 2rem; 
+}
+
+@media (max-width: 768px) {
+    section {
+        padding: 1.5rem 0.5rem; 
+    }
+
+    .complete-abc-grid, .numbers-grid, .rhymes-container, .color-palette {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+        gap: 0.5rem; 
+    }
+
+    .letter-card, .number-card, .video-card, .color-item {
+        padding: 0.75rem;
+    }
+}
+.abc-grid .image-item img { height: 100px; object-fit: cover; }
+
+.complete-abc-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+
+.image-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.abc-grid .image-item img {
+    height: 100%; 
+}
+
+.numbers-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+
+.number-card .image-item {
+    height: 150px;
+}
+
+.letter-card {
+    padding: 2rem;
+}
+
+@media (max-width: 768px) {
+    .complete-abc-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+    
+    .numbers-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+}
+
+.complete-abc-grid {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+    gap: 2rem; 
+}
+
+
+.letter-card .image-grid {
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 1rem; 
+}
+
+.letter-card .image-item {
+    height: 120px;
+    
+}
+
+.letter-card .image-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    transition: transform 0.3s ease; 
+}
+
+.letter-card .image-item:hover img {
+    transform: scale(1.1); 
+}
+
+
+.numbers-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+    gap: 2rem; 
+}
+
+.number-card .image-item {
+    height: 200px; 
+}
+
+.number-card .image-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+section {
+    padding: 4rem 2rem; 
+}
+
+
+@media (max-width: 768px) {
+    .complete-abc-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    }
+
+    .letter-card .image-item {
+        height: 150px; 
+    }
+
+    .numbers-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+    }
+
+    .number-card .image-item {
+        height: 150px; 
+    }
+}
+.color-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+        .color-item {
+            padding: 20px;
+            border-radius: 10px;
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
+            width: 120px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);}
+    </style>
+    
+</head>
+<body>
+    <header>
+
+        <nav class="nav-container">
+            <a href="#abcs" class="nav-button">ABCs</a>
+            <a href="#numbers" class="nav-button">123</a>
+            <a href="#nursery-rhymes" class="nav-button">Music</a>
+            <a href="#colors" class="nav-button">Colors</a>
+            <a href="#math" class="nav-button">Math</a>
+        </nav>
+       
+    </header>
+
+
+<section id="abcs">
+    <h2>Learn Your ABCs</h2>
+    <div class="complete-abc-grid">
+      
+
+        <div class="letter-card" onclick="playSound('letter-a')">
+            <div class="letter-header">
+                <h3>A</h3>
+            </div>
+            <div class="image-grid">
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpV97EcHMyGzwPA1VZeaNbvtg9ifdm-m3RIw&s" alt="Apple">
+                    <div class="image-label">Apple</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuze9DyO5c3M3Z4a71OSqsqhdd5AZPltEQaw&s" alt="Ant">
+                    <div class="image-label">Ant</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5cWZeq7_D_FfC4_7PkQRQjELphc13XzlxXQ&s" alt="Airplane">
+                    <div class="image-label">Airplane</div>
+                </div>
+            </div>
+        </div>
+
+     
+        <div class="letter-card" onclick="playSound('letter-b')">
+            <div class="letter-header">
+                <h3>B</h3>
+            </div>
+            <div class="image-grid">
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPFpTnxphhp5uqHzzxDNQL1PwlwyFCZ0n4oA&s" alt="Ball">
+                    <div class="image-label">Ball</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSn7LSHlhHczrLHRVbQkR_cDGV8tCv_E2QFSYW9o4MVlXyb7IH0s1H2t4oXNRbsJDz5uow&usqp=CAU" alt="Bear">
+                    <div class="image-label">Bear</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt1SwmQhNWupbJYEBGbQpPM70AnLxs-eqlog&s" alt="Boat">
+                    <div class="image-label">Boat</div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="letter-card" onclick="playSound('letter-c')">
+            <div class="letter-header">
+                <h3>C</h3>
+            </div>
+            <div class="image-grid">
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7p1FOUdmbIGqM-JcqnUfDpBkK9rzSRXHTkg&s" alt="Cat">
+                    <div class="image-label">Cat</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwaRNXGRD7wGEm93uK_1QnDcRhUtBZnpfGLg&s" alt="Car">
+                    <div class="image-label">Car</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://media.istockphoto.com/id/1311461815/vector/illustration-vector-graphic-design-asset-of-cream-cake-suitable-for-multipurpose-content.jpg?s=612x612&w=0&k=20&c=JeNpdxUftEdYWWjPRiqUCWxYQs10Y8ulLy03RFNFdIE=" alt="Cake">
+                    <div class="image-label">Cake</div>
+                </div>
+            </div>
+        </div>
+        <div class="letter-card" onclick="playSound('letter-d')">
+            <div class="letter-header">
+                <h3>D</h3>
+            </div>
+            <div class="image-grid">
+                <div class="image-item">
+                    <img src="https://png.pngtree.com/png-vector/20231020/ourmid/pngtree-cute-cartoon-dog-png-file-png-image_10235707.png" alt="Dog">
+                    <div class="image-label">Dog</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUtUiDSZeEAGVNz9kEwtoSlX2nTS22YfkzxA&s" alt="Duck">
+                    <div class="image-label">Duck</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRXcWXJIxWfvObWPFeZSv_cFogxSOzB7ZBrA&s" alt="Drum">
+                    <div class="image-label">Drum</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="letter-card" onclick="playSound('letter-e')">
+            <div class="letter-header">
+                <h3>E</h3>
+            </div>
+            <div class="image-grid">
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSyRUiA8MVl6PNLHHFvaNLZS69oMWXYYjLeg&s" alt="Elephant">
+                    <div class="image-label">Elephant</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://img.freepik.com/free-vector/egg-cartoon-style_78370-1042.jpg" alt="Egg">
+                    <div class="image-label">Egg</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkONwul5ghDbwPA3ZebAxSJY_DzMju5XvAcg&s" alt="Engine">
+                    <div class="image-label">Engine</div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="letter-card" onclick="playSound('letter-f')">
+            <div class="letter-header">
+                <h3>F</h3>
+            </div>
+            <div class="image-grid">
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHsQ-iWK82i_Xml-aZZeocVA0y_5DUgVyI4g&s" alt="Fish">
+                    <div class="image-label">Fish</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRx4jNX0cu1L4Oq7Pf25y7PsP7qqLz_pj-G0g&s" alt="Flower">
+                    <div class="image-label">Flower</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://t3.ftcdn.net/jpg/05/36/14/74/360_F_536147432_KF2UmIBU9B4j0t32WIBG4MD81bOgZifd.jpg" alt="Firetruck">
+                    <div class="image-label">Firetruck</div>
+                </div>
+            </div>
+        </div>
+
+  
+        <div class="letter-card" onclick="playSound('letter-g')">
+            <div class="letter-header">
+                <h3>G</h3>
+            </div>
+            <div class="image-grid">
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCRqHwRYaDMkV9hk8RERqn2VM1U8991Mtzdw&s" alt="Goat">
+                    <div class="image-label">Goat</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://png.pngtree.com/png-clipart/20230217/ourmid/pngtree-guitar-cartoon-png-image_6604793.png" alt="Guitar">
+                    <div class="image-label">Guitar</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuMbLETDAcPaJUUwNY651e-lmfwL6SCyo5sw&s" alt="Gift">
+                    <div class="image-label">Gift</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="letter-card" onclick="playSound('letter-h')">
+            <div class="letter-header">
+                <h3>H</h3>
+            </div>
+            <div class="image-grid">
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoVqvzUMP_iACOf6c61cs_DhdQSFIKV4NApg&s" alt="Hat">
+                    <div class="image-label">Hat</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSI53xlEwcHNqY-U4YOFL1XFXlm0lN8Tb-M0g&s" alt="House">
+                    <div class="image-label">House</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRg-pW7wBKfI4saq4898PamNEqufDSB8bMD8w&s" alt="Horse">
+                    <div class="image-label">Horse</div>
+                </div>
+            </div>
+        </div>
+
+    
+        <div class="letter-card" onclick="playSound('letter-i')">
+            <div class="letter-header">
+                <h3>I</h3>
+            </div>
+            <div class="image-grid">
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRW2ZtmkE-lHbhTHwBXuxrD_KWidBeJpG1zw&s" alt="Ice Cream">
+                    <div class="image-label">Ice Cream</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://t3.ftcdn.net/jpg/01/66/87/84/360_F_166878477_SgZebbpzK6mFlomxuBJpsQShMFUgrQiA.jpg" alt="Igloo">
+                    <div class="image-label">Igloo</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://www.shutterstock.com/image-vector/cartoon-grasshopper-isolated-on-white-600nw-1982520770.jpg" alt="Insect">
+                    <div class="image-label">Insect</div>
+                </div>
+            </div>
+        </div>
+
+     
+        <div class="letter-card" onclick="playSound('letter-j')">
+            <div class="letter-header">
+                <h3>J</h3>
+            </div>
+            <div class="image-grid">
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw1nKkgTI8LTMNvE1MD-khHmUwRdJ8zIJnVQ&s" alt="Jellyfish">
+                    <div class="image-label">Jellyfish</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwyjIlQcXQNezn_REXHqzl-DenQRS1jqyy8g&s" alt="Jacket">
+                    <div class="image-label">Jacket</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://img.freepik.com/premium-vector/cute-boy-jumping-vector-illustration_96037-596.jpg?semt=ais_hybrid" alt="Jump">
+                    <div class="image-label">Jump</div>
+                </div>
+            </div>
+        </div>
+
+     
+        <div class="letter-card" onclick="playSound('letter-k')">
+            <div class="letter-header">
+                <h3>K</h3>
+            </div>
+            <div class="image-grid">
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRa_BpAGrITYCsZNdE3GSQxAYyV7TGiw6CSVw&s" alt="Kite">
+                    <div class="image-label">Kite</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQy0fz10ndjYsRp5uE5yzVhwjA4X6BNYYUn6w&s" alt="Kiwi">
+                    <div class="image-label">Kiwi</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwMKQY0kKGugocyfTwEAE2nTjR2F3EJELgEQ&s" alt="Kangaroo">
+                    <div class="image-label">Kangaroo</div>
+                </div>
+            </div>
+        </div>
+
+  
+        <div class="letter-card" onclick="playSound('letter-l')">
+            <div class="letter-header">
+                <h3>L</h3>
+            </div>
+            <div class="image-grid">
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8TIciDvRvuviUsjHJU09D7t1QhHNqYEd8yg&s" alt="Lion">
+                    <div class="image-label">Lion</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://t4.ftcdn.net/jpg/02/88/50/97/360_F_288509750_Rx3mpwXN4jaSrbQx1uirbUSMmcRWm8I4.jpg" alt="Lemon">
+                    <div class="image-label">Lemon</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://img.freepik.com/premium-vector/yellow-cartoon-electric-lamp-white-background_87744-170.jpg?semt=ais_hybrid" alt="Lamp">
+                    <div class="image-label">Lamp</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="letter-card" onclick="playSound('letter-m')">
+            <div class="letter-header">
+                <h3>M</h3>
+            </div>
+            <div class="image-grid">
+                <div class="image-item">
+                    <img src="https://static.vecteezy.com/system/resources/previews/003/513/751/non_2x/cute-monkey-hanging-tree-cartoon-illustration-free-vector.jpg" alt="Monkey">
+                    <div class="image-label">Monkey</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://media.istockphoto.com/id/1132395683/vector/cute-mouse-cartoon-presenting.jpg?s=612x612&w=0&k=20&c=d221Xda14VxBOlJiPkHiQgucDzH8W5RR4WGu_eFp_PU=" alt="Mouse">
+                    <div class="image-label">Mouse</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://t3.ftcdn.net/jpg/01/36/33/48/360_F_136334861_pBHpG4hSvyN66ddSqs0ddtKXG8Eoq3NW.jpg" alt="Mango">
+                    <div class="image-label">Mango</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="letter-card" onclick="playSound('letter-n')">
+            <div class="letter-header">
+                <h3>N</h3>
+            </div>
+            <div class="image-grid">
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNvaeOOrZJrHEgVPzUClA4bbc3vWBcVecs8g&s" alt="Nest">
+                    <div class="image-label">Nest</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://png.pngtree.com/png-clipart/20210826/ourmid/pngtree-nurse-medical-care-hand-drawn-cartoon-elements-png-image_3527542.jpg" alt="Nurse">
+                    <div class="image-label">Nurse</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://t4.ftcdn.net/jpg/00/66/94/17/360_F_66941756_mfi4jxOdn3NkQhOzP7jyQLGHQSrmh67K.jpg" alt="Nut">
+                    <div class="image-label">Nut</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="letter-card" onclick="playSound('letter-o')">
+            <div class="letter-header">
+                <h3>O</h3>
+            </div>
+            <div class="image-grid">
+                <div class="image-item">
+                    <img src="https://img.freepik.com/free-vector/orange-fruit_78370-544.jpg" alt="Orange">
+                    <div class="image-label">Orange</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQboyxLS7cIuaQLdMK58GXTpuGMnsE2JiDBBw&s" alt="Owl">
+                    <div class="image-label">Owl</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlNR68GS4rpBu7g6WRvoggp9L-DEfBpox3CQ&s" alt="Ostrich">
+                    <div class="image-label">Ostrich</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="letter-card" onclick="playSound('letter-p')">
+            <div class="letter-header">
+                <h3>P</h3>
+            </div>
+            <div class="image-grid">
+                <div class="image-item">
+                    <img src="https://media.istockphoto.com/id/1681388313/vector/cute-baby-panda-cartoon-on-white-background.jpg?s=612x612&w=0&k=20&c=qFrzn8TqONiSfwevvkYhys1z80NAmDfw3o-HRdwX0d8=" alt="Panda">
+                    <div class="image-label">Panda</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwNUBSmWCAPWEZeE1Zc7T_X6X25ALO6sdIwg&s" alt="Pizza">
+                    <div class="image-label">Pizza</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTi2AabBV56XgduzB8_hjwjzaFutjByJIbd7g&s" alt="Peach">
+                    <div class="image-label">Peach</div>
+                </div>
+            </div>
+        </div>
+
+       
+        <div class="letter-card" onclick="playSound('letter-q')">
+            <div class="letter-header">
+                <h3>Q</h3>
+            </div>
+            <div class="image-grid">
+                <div class="image-item">
+                    <img src="https://img.freepik.com/premium-vector/quilt-cartoon-vector-illustration-cute-quilt-cartoon-drawing-playful-bedding-design_648083-625.jpg" alt="Quilt">
+                    <div class="image-label">Quilt</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2VA2uO0DiNInbVdec5NdoLDXUUQ77LsX4zw&s" alt="Quokka">
+                    <div class="image-label">Quokka</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://img.freepik.com/free-vector/beautiful-queen-cartoon-character-sticker_1308-58920.jpg" alt="Queen">
+                    <div class="image-label">Queen</div>
+                </div>
+            </div>
+        </div>
+
+    
+        <div class="letter-card" onclick="playSound('letter-r')">
+            <div class="letter-header">
+                <h3>R</h3>
+            </div>
+            <div class="image-grid">
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQu3wegFSD3RKE6rJD7ARR35sHNRYI4hsteYw&s" alt="Rabbit">
+                    <div class="image-label">Rabbit</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsmPka5LFNnyJqEoy5Di7-AL64DgWrzNrP3A&s" alt="Rainbow">
+                    <div class="image-label">Rainbow</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Cartoon_space_rocket.png" alt="Rocket">
+                    <div class="image-label">Rocket</div>
+                </div>
+            </div>
+        </div>
+
+       
+        <div class="letter-card" onclick="playSound('letter-s')">
+            <div class="letter-header">
+                <h3>S</h3>
+            </div>
+            <div class="image-grid">
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWw3zfAQLE1I3l70a8uLtuWWpUJxdGD_rahg&s" alt="Sun">
+                    <div class="image-label">Sun</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://t3.ftcdn.net/jpg/03/25/61/62/360_F_325616239_jPMacbnlr5hNYLBOazcKMtwvLWGKUEy3.jpg" alt="Strawberry">
+                    <div class="image-label">Strawberry</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkuFDlj1ZcD0AF6D77EhbE4ylaVWfAp1tVAw&s" alt="Sandcastle">
+                    <div class="image-label">Sandcastle</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="letter-card" onclick="playSound('letter-t')">
+            <div class="letter-header">
+                <h3>T</h3>
+            </div>
+            <div class="image-grid">
+                <div class="image-item">
+                    <img src="https://img.freepik.com/premium-vector/tiger-cartoon-animal-illustration_7814-730.jpg?semt=ais_hybrid" alt="Tiger">
+                    <div class="image-label">Tiger</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://img.freepik.com/premium-vector/realistic-train-cartoon-vector-illustration_1253202-17643.jpg?w=360" alt="Train">
+                    <div class="image-label">Train</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://t3.ftcdn.net/jpg/02/12/04/16/360_F_212041631_IlUpamHEbdvRMmzfuXav1XORBnaIXuEf.jpg" alt="Turtle">
+                    <div class="image-label">Turtle</div>
+                </div>
+            </div>
+        </div>
+
+      
+        <div class="letter-card" onclick="playSound('letter-u')">
+            <div class="letter-header">
+                <h3>U</h3>
+            </div>
+            <div class="image-grid">
+                <div class="image-item">
+                    <img src="https://img.freepik.com/premium-vector/umbrella-cartoon-vector-illustration-cute-umbrella-cartoon-drawing-playful-rainy-day-design_648083-661.jpg" alt="Umbrella">
+                    <div class="image-label">Umbrella</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSz-50Em3LFuPpHp9KFCo1C__0l2zA4Ht0HjQ&s" alt="Unicorn">
+                    <div class="image-label">Unicorn</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://img.freepik.com/premium-vector/vector-cute-ukulele-cartoon-style_846317-1833.jpg" alt="Ukulele">
+                    <div class="image-label">Ukulele</div>
+                </div>
+            </div>
+        </div>
+
+      
+        <div class="letter-card" onclick="playSound('letter-v')">
+            <div class="letter-header">
+                <h3>V</h3>
+            </div>
+            <div class="image-grid">
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLuW-JZqnmETapCY9g-7fEatrsq5hdzCnNHQ&s" alt="Violin">
+                    <div class="image-label">Violin</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXjOPsbcp8Vpx9tEkf5GUNw6tz3aE6WafZfg&s" alt="Volcano">
+                    <div class="image-label">Volcano</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMiQ_9e2sdDogkd3GzZHI2yiTUPpwBFYkcCw&s" alt="Vase">
+                    <div class="image-label">Vase</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="letter-card" onclick="playSound('letter-w')">
+            <div class="letter-header">
+                <h3>W</h3>
+            </div>
+            <div class="image-grid">
+                <div class="image-item">
+                    <img src="https://t4.ftcdn.net/jpg/02/71/31/29/360_F_271312913_fNkJIq7J4EojJTfB4flj6NLvl1NjYPJ4.jpg" alt="Watermelon">
+                    <div class="image-label">Watermelon</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLxn6ZowER-c6Z-NJvIJKm1KTZwd-hb6T8oQ&s" alt="Wolf">
+                    <div class="image-label">Wolf</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVmNV_pGVMXKQo1LHhAj9HMBkGei7cKv1CWQ&s" alt="Wheel">
+                    <div class="image-label">Wheel</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="letter-card" onclick="playSound('letter-x')">
+            <div class="letter-header">
+                <h3>X</h3>
+            </div>
+            <div class="image-grid">
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMW836tcTWgzlLt3E25a7_U6TEeUxhzs8m3Q&s" alt="Xylophone">
+                    <div class="image-label">Xylophone</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://thumbs.dreamstime.com/b/cartoon-boy-patient-xray-ray-kid-child-skeleton-bones-snapshot-clinic-doctor-vector-illustration-162314185.jpg" alt="X-ray">
+                    <div class="image-label">X-ray</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://www.shutterstock.com/image-vector/festive-cartoon-christmas-tree-ornaments-600nw-2478303261.jpg" alt="Christmas Tree">
+                    <div class="image-label">Christmas Tree</div>
+                </div>
+            </div>
+        </div>
+
+      
+        <div class="letter-card" onclick="playSound('letter-y')">
+            <div class="letter-header">
+                <h3>Y</h3>
+            </div>
+            <div class="image-grid">
+                <div class="image-item">
+                    <img src="https://static.vecteezy.com/system/resources/previews/031/091/443/non_2x/speedboat-cartoon-illustration-yacht-isolated-on-white-background-vector.jpg" alt="Yacht">
+                    <div class="image-label">Yacht</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://c4.wallpaperflare.com/wallpaper/854/286/447/minions-movies-yellow-animated-movies-wallpaper-preview.jpg" alt="Yellow">
+                    <div class="image-label">Yellow</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://media.istockphoto.com/id/1250450377/vector/balls-of-yarn-with-knitting-needles-clews-skeins-of-wool-tools-for-handicraft-hand-knitting.jpg?s=612x612&w=0&k=20&c=nFbHMIbKnqx9_5Leg2uIpzAu4crKVdXtNC1XlEHTf5k=" alt="Yarn">
+                    <div class="image-label">Yarn</div>
+                </div>
+            </div>
+        </div>
+
+   
+        <div class="letter-card" onclick="playSound('letter-z')">
+            <div class="letter-header">
+                <h3>Z</h3>
+            </div>
+            <div class="image-grid">
+                <div class="image-item">
+                    <img src="https://media.istockphoto.com/id/1338906907/vector/cute-cartoon-zebra-outline-drawing-for-coloring-on-a-white-background.jpg?s=612x612&w=0&k=20&c=sXBDxrAtwapqEASVWkrugdxrUPHsshww7FZcgB1v3ns=" alt="Zebra">
+                    <div class="image-label">Zebra</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://media.istockphoto.com/id/626959692/vector/zipper-cartoon-icon.jpg?s=612x612&w=0&k=20&c=Mvbw0GqpOzpqQLRn07f22FZyXEQN3a-caQMrtoXTi6c=" alt="Zipper">
+                    <div class="image-label">Zipper</div>
+                </div>
+                <div class="image-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ6x9f1j36Ws_MMMSz2AUAtYhLIOGnWutZOg&s" alt="Zucchini">
+                    <div class="image-label">Zucchini</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="numbers">
+    <h2>Numbers 1-10</h2>
+    <div class="numbers-grid">
+        <div class="number-card" onclick="playSound('number-1')">
+            <h3>1</h3>
+            <div class="image-item">
+                <img src="https://www.shutterstock.com/shutterstock/videos/1056545822/thumb/1.jpg?ip=x480" alt="One Sun">
+            </div>
+        </div>
+
+        <div class="number-card" onclick="playSound('number-2')">
+            <h3>2</h3>
+            <div class="image-item">
+                <img src="https://media.istockphoto.com/id/1280926557/vector/cute-cartoon-baby-duck.jpg?s=612x612&w=0&k=20&c=rKYl2ccG6UrMmGiFXpLEoQGKYFsLyNw0otAxzgXmfrk=" alt="Two Ducks">
+            </div>
+        </div>
+
+        <div class="number-card" onclick="playSound('number-3')">
+            <h3>3</h3>
+            <div class="image-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXZ23I-aLcsDzjStXWBgHaGVKYWBuww8lXjQ&s" alt="Three Bears">
+            </div>
+        </div>
+
+        <div class="number-card" onclick="playSound('number-4')">
+            <h3>4</h3>
+            <div class="image-item">
+                <img src="https://img.freepik.com/premium-vector/set-group-4-cute-cartoon-flowers-floral-vector-illustration_988987-6801.jpg" alt="Four Flowers">
+            </div>
+        </div>
+
+
+        <div class="number-card" onclick="playSound('number-5')">
+            <h3>5</h3>
+            <div class="image-item">
+                <img src="https://media.istockphoto.com/id/1429434661/vector/five-stars-rating.jpg?s=612x612&w=0&k=20&c=TSpu3kSYRMXP6R_NusaEBQ8A_h70L2NSu1XYS5vTmug=" alt="Five Stars">
+            </div>
+        </div>
+
+        <div class="number-card" onclick="playSound('number-6')">
+            <h3>6</h3>
+            <div class="image-item">
+                <img src="https://thumbs.dreamstime.com/b/bundle-template-funny-fish-qute-349163830.jpg" alt="Six Fish">
+            </div>
+        </div>
+
+        <div class="number-card" onclick="playSound('number-7')">
+            <h3>7</h3>
+            <div class="image-item">
+                <img src="https://www.shutterstock.com/shutterstock/videos/29924056/thumb/12.jpg?ip=x480" alt="Seven Rainbows">
+            </div>
+        </div>
+
+        <div class="number-card" onclick="playSound('number-8')">
+            <h3>8</h3>
+            <div class="image-item">
+                <img src="https://img.freepik.com/premium-vector/set-eight-colorful-balloons-clipart-vector-illustration-isolated-white-background_509058-25.jpg" alt="Eight Balloons">
+            </div>
+        </div>
+
+        <div class="number-card" onclick="playSound('number-9')">
+            <h3>9</h3>
+            <div class="image-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvAVm-gR4JQxdoN17yzCP8QXFNVwVC4wFt8A&s" alt="Nine Butterflies">
+            </div>
+        </div>
+
+        <div class="number-card" onclick="playSound('number-10')">
+            <h3>10</h3>
+            <div class="image-item">
+                <img src="https://www.shutterstock.com/image-vector/collection-cars-260nw-35928055.jpg" alt="Ten Cars">
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+    
+    <section id="nursery-rhymes">
+        <h2>Popular Nursery Rhymes</h2>
+        <div class="rhymes-container">
+            <div class="video-card">
+                <iframe src="https://www.youtube.com/embed/yCjJyiqpAuU" 
+                    title="Twinkle Twinkle" 
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope" 
+                    allowfullscreen></iframe>
+                <div class="video-label">Twinkle Twinkle Little Star</div>
+            </div>
+
+            <div class="video-card">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/9uTBSRUIVLI?si=M4tWhbQ_Dp_v4nVy" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <div class="video-label">Wheels on the Bus</div>
+            </div>
+
+            <div class="video-card">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/4bMOTTJqGgM?si=jca7dL-Ngu-5g9Z9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <div class="video-label">Baby Shark Dance</div>
+            </div>
+        </div>
+    </section>
+    <section id="colors">
+        <h2>🌈 colors world</h2>
+        <div class="color-list">
+            <div class="color-item" style="background-color: #ff5252;">
+                <p>Red</p>
+            </div>
+            <div class="color-item" style="background-color: #42a5f5;">
+                <p>Blue</p>
+            </div>
+            <div class="color-item" style="background-color: #66bb6a;">
+                <p>Green</p>
+            </div>
+            <div class="color-item" style="background-color: #ffeb3b;">
+                <p>Yellow</p>
+            </div>
+            <div class="color-item" style="background-color: #ff9800;">
+                <p>Orange</p>
+            </div>
+            <div class="color-item" style="background-color: #ab47bc;">
+                <p>Purple</p>
+            </div>
+            <div class="color-item" style="background-color: #ff4081;">
+                <p>Pink</p>
+            </div>
+            <div class="color-item" style="background-color: #8d6e63;">
+                <p>Brown </p>
+            </div>
+            <div class="color-item" style="background-color: #00bcd4;">
+                <p>Cyan</p>
+            </div>
+            <div class="color-item" style="background-color: #cddc39;">
+                <p>Lime</p>
+            </div>
+        </div>
+    </section>
+
+<section id="math">
+    <h2>Math Adventure</h2>
+    <div class="math-game">
+        <div class="math-problem">3 + 2 = ?</div>
+        <input type="number" id="answer" class="answer-input" placeholder="Enter answer">
+        <button class="submit-btn" onclick="checkAnswer()">Check Answer</button>
+        <div id="result" class="result-message"></div>
+    </div>
+</section>
+
+ 
+    <section id="parent-section">
+        <h2>Progress Tracking</h2>
+        <div class="progress-dashboard">
+            <div class="progress-card">
+                <h3>Learning Progress</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 65%"></div>
+                </div>
+                <p>Completed: 65%</p>
+            </div>
+
+            <div class="achievements">
+                <h3>Earned Badges</h3>
+                <div class="badges-grid">
+                    <div class="badge-item">
+                        <i class="fas fa-award"></i>
+                        <span>ABC Master</span>
+                    </div>
+                    <div class="badge-item">
+                        <i class="fas fa-calculator"></i>
+                        <span>Math Whiz</span>
+                    </div>
+                    <div class="badge-item">
+                        <i class="fas fa-music"></i>
+                        <span>Music Maestro</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-bubbles"></div>
+        <p>© 2023 Kids-Zone. All rights reserved.</p>
+    </footer>
+
+    <script>
+       const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+        function playSound(sound) {
+            const audio = new Audio(`sounds/${sound}.mp3`);
+            audio.play();
+        }
+
+        let currentProblem = generateMathProblem();
+        
+        function generateMathProblem() {
+            const num1 = Math.floor(Math.random() * 10);
+            const num2 = Math.floor(Math.random() * 10);
+            return { num1, num2, answer: num1 + num2 };
+        }
+
+        function checkAnswer() {
+            const userAnswer = parseInt(document.getElementById('answer').value);
+            const result = document.getElementById('result');
+            
+            if (userAnswer === currentProblem.answer) {
+                result.textContent = "🎉 Correct! Great job!";
+                result.style.color = "green";
+                playSound('success');
+                currentProblem = generateMathProblem();
+                updateMathProblem();
+            } else {
+                result.textContent = "❌ Try again!";
+                result.style.color = "red";
+                playSound('error');
+            }
+        }
+
+        function updateMathProblem() {
+            document.querySelector('.math-problem').textContent = 
+                `${currentProblem.num1} + ${currentProblem.num2} = ?`;
+            document.getElementById('answer').value = '';
+        }
+
+        updateMathProblem();
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+       
+        document.addEventListener('DOMContentLoaded', () => {
+           
+            initProgressTracking();
+            setupVideoControls();
+        });
+
+        function initProgressTracking() {
+            
+            localStorage.getItem('learningProgress') || 
+            localStorage.setItem('learningProgress', '0');
+        }
+
+        function setupVideoControls() {
+           
+            const videos = document.querySelectorAll('iframe');
+            videos.forEach(video => {
+                video.addEventListener('click', () => {
+                    playSound('video-start');
+                });
+            });
+        }
+
+        
+    </script>
+</body>
+</html>
